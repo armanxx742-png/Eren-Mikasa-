@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ff7eb6">
+<title>For Mikasa ♡ — From Eren</title>
+<style>
+:root{--pink:#ff6fae;--deep:#b83270;--cream:#fff7fb;--ink:#57223d}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;overflow-x:hidden;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:radial-gradient(circle at top,#fff 0,#ffe6f1 38%,#ffc6df 100%);display:grid;place-items:center;padding:22px}
+.hearts{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.heart{position:absolute;bottom:-50px;color:#ff5c9e;opacity:.65;animation:floatUp linear forwards}
+@keyframes floatUp{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.card{position:relative;z-index:1;width:min(100%,520px);padding:clamp(24px,6vw,42px);text-align:center;border:1px solid #ffffffc9;border-radius:30px;background:#ffffffc9;box-shadow:0 18px 60px #b8327025;backdrop-filter:blur(10px)}
+.badge{display:inline-block;background:#ffe0ee;color:#a02b64;border-radius:99px;padding:7px 13px;font-size:.82rem;letter-spacing:.04em}
+h1{font-size:clamp(2rem,8vw,3.25rem);line-height:1.05;margin:18px 0 12px;color:#a52e68}
+.subtitle{font-size:1.05rem;line-height:1.65;margin:0 auto 22px;max-width:390px}
+.big-heart{font-size:4rem;display:block;animation:pulse 1.5s infinite;filter:drop-shadow(0 8px 12px #ff6fae55)}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.question{font-weight:750;font-size:1.25rem;margin:20px 0 16px}
+.buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;min-height:52px}
+button{border:0;border-radius:99px;padding:13px 23px;font-size:1rem;font-weight:750;cursor:pointer;transition:transform .18s,box-shadow .18s}
+button:hover{transform:translateY(-2px)}
+#yes{background:linear-gradient(135deg,#ff5c9e,#d93682);color:white;box-shadow:0 8px 20px #e7478a40}
+#no{background:#fff;color:#a52e68;border:1px solid #f3b5d1}
+#music{background:#fff0f7;color:#a52e68;border:1px solid #f5bfd8;margin-top:18px;font-size:.9rem;padding:10px 16px}
+#message{display:none;margin-top:24px;padding:20px;border-radius:20px;background:#fff0f7;line-height:1.7;animation:appear .45s ease}
+@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.footer{margin-top:22px;font-size:.82rem;opacity:.72}
+.sparkle{position:fixed;pointer-events:none;z-index:5;animation:pop 1s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--x),var(--y)) scale(.2) rotate(150deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+<main class="card">
+  <span class="badge">A tiny website, made with love</span>
+  <span class="big-heart" aria-hidden="true">💗</span>
+  <h1>MIKASA, you’re special</h1>
+  <p class="subtitle">Out of all the little moments in this world, you make ordinary ones feel magical.</p>
+  <p class="question">Will you be my favourite person? 🌷</p>
+  <div class="buttons">
+    <button id="yes" type="button">Yes, of course! 💖</button>
+    <button id="no" type="button">No 🙈</button>
+  </div>
+  <section id="message" aria-live="polite">
+    <h2>YAY! 💞</h2>
+    <p>MIKASA, you just made EREN’s day brighter. 🌸</p>
+    <p>“If I could choose one little moment to keep forever, I’d choose a moment that makes you smile.”</p>
+    <p><strong>— With love, EREN ♡</strong></p>
+  </section>
+  <button id="music" type="button">♫ Turn on gentle music</button>
+  <p class="footer">Made for MIKASA, from EREN • Tap the music button for a soft melody</p>
+</main>
+<script>
+const hearts = document.getElementById('hearts');
+function makeHeart(){
+  const h=document.createElement('span'); h.className='heart'; h.textContent=['♥','♡','💗','✦'][Math.floor(Math.random()*4)];
+  h.style.left=Math.random()*100+'vw'; h.style.fontSize=(14+Math.random()*22)+'px';
+  const duration=5+Math.random()*6; h.style.animationDuration=duration+'s'; hearts.appendChild(h);
+  setTimeout(()=>h.remove(),duration*1000);
+}
+for(let i=0;i<14;i++) setTimeout(makeHeart,i*220);
+setInterval(makeHeart,650);
+
+const yes=document.getElementById('yes'), no=document.getElementById('no'), message=document.getElementById('message');
+yes.addEventListener('click',()=>{
+  message.style.display='block';
+  for(let i=0;i<30;i++){
+    const s=document.createElement('span');s.className='sparkle';s.textContent=['💖','✨','🌸','💕'][Math.floor(Math.random()*4)];
+    s.style.left=(35+Math.random()*30)+'vw';s.style.top=(35+Math.random()*30)+'vh';
+    s.style.setProperty('--x',(Math.random()*260-130)+'px');s.style.setProperty('--y',(Math.random()*-220-30)+'px');
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1000);
+  }
+});
+let noCount=0;
+no.addEventListener('click',()=>{
+  noCount++;
+  const lines=['Are you sure? 🥺','One more tiny thought? 🌷','I’ll respect your answer 💗'];
+  no.textContent=lines[Math.min(noCount-1,lines.length-1)];
+  if(noCount<3){no.style.transform=`translate(${Math.random()*24-12}px,${Math.random()*12-6}px)`;}
+  else {no.style.transform='none';}
+});
+/* A small original melody made with Web Audio; starts only after a user tap. */
+let audioCtx=null, musicTimer=null, noteIndex=0;
+const notes=[523.25,659.25,783.99,659.25,587.33,698.46,880,698.46];
+const musicBtn=document.getElementById('music');
+function playNote(){
+  if(!audioCtx)return;
+  const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+  osc.type='sine';osc.frequency.value=notes[noteIndex%notes.length];
+  gain.gain.setValueAtTime(0.0001,audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.055,audioCtx.currentTime+.04);
+  gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+.42);
+  osc.connect(gain);gain.connect(audioCtx.destination);osc.start();osc.stop(audioCtx.currentTime+.44);noteIndex++;
+}
+musicBtn.addEventListener('click',async()=>{
+  if(musicTimer){clearInterval(musicTimer);musicTimer=null;musicBtn.textContent='♫ Turn on gentle music';if(audioCtx)await audioCtx.suspend();return;}
+  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+  if(!AudioContextClass){musicBtn.textContent='Music is not supported in this browser';return;}
+  audioCtx=audioCtx||new AudioContextClass();await audioCtx.resume();playNote();musicTimer=setInterval(playNote,480);musicBtn.textContent='♫ Turn off gentle music';
+});
+</script>
+</body>
+</html>
